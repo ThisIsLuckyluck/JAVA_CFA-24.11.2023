@@ -11,12 +11,12 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Lancement du script de connexion");
 
-        String jdbcurl = "jdbc:h2:tcp://localhost/~/test";
-        String login = "root";
-        String mdp = "root";
+        String jdbcurl = "url/using/h2/localhost";
+        String login = "your_log";
+        String mdp = "your_passwd";
 
         try (Connection connection = DriverManager.getConnection(jdbcurl, login, mdp)) {
-            System.out.println("Connection réussie");
+            System.out.println("Connexion réussie");
 
             PersonneDao personneDao = new PersonneDaoImpl();
             Scanner scanner = new Scanner(System.in);
