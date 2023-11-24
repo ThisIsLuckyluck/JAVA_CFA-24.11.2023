@@ -1,0 +1,40 @@
+// Demander à l'utilisateur s'il veut supprimer la personne
+                System.out.println("Voulez-vous supprimer cette personne ? (O/N)");
+                String response = scanner.next();
+
+                if (response.equalsIgnoreCase("O")) {
+                    personneDao.deleteById(idToProcess, connection);
+                    System.out.println("Personne supprimée avec succès.");
+                } else {
+                    System.out.println("Opération annulée. Aucune personne supprimée.");
+                }
+            } else {
+                System.out.println("Aucune personne trouvée avec l'ID " + idToProcess);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Connexion échouée");
+            e.printStackTrace();
+        }
+    }
+}
+
+            // Utiliser le DAO pour récupérer la personne par ID et l'afficher
+            PersonneDao personneDao = new PersonneDaoImpl();
+            Personne personne = personneDao.getById(idToProcess, connection);
+
+            if (personne != null) {
+                System.out.println("Détails de la personne avec l'ID " + idToProcess + ":");
+                System.out.println("Nom: " + personne.getNom());
+                System.out.println("Age: " + personne.getAge());
+
+                // Afficher toutes les personnes
+            Statement stmt = connection.createStatement();
+            String request = "SELECT * FROM personne";
+            ResultSet resultSet = stmt.executeQuery(request);
+
+            while (resultSet.next()) {
+                System.out.println("ID: " + resultSet.getInt("id"));
+                System.out.println(", Nom: " + resultSet.getString("Name"));
+                System.out.println(", Age: " + resultSet.getInt("AGE"));
+            }
