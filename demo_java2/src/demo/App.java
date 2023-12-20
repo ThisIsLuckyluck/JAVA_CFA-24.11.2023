@@ -64,7 +64,7 @@ public class App {
             e.printStackTrace();
         }
     }
-
+    // Interface utilisateur
     private static void displayMenu() {
         System.out.println("Choisissez une action :");
         System.out.println("1. Tout afficher");
@@ -85,6 +85,7 @@ public class App {
         System.out.println("14. Fin");
     }
 
+    //Personne SECTION
     private static void displayAllPersons(PersonneDao personneDao, Connection connection) {
         List<Personne> personnes = personneDao.getAllPersons(connection);
 
@@ -101,7 +102,7 @@ public class App {
     private static void displayPersonById(PersonneDao personneDao, Scanner scanner, Connection connection) {
         System.out.println("Entrez l'ID de la personne que vous souhaitez afficher : ");
         int idToDisplay = scanner.nextInt();
-        Personne personne = personneDao.getById(idToDisplay, connection);
+        Personne personne = personneDao.getPersonneById(idToDisplay, connection);
 
         if (personne != null) {
             System.out.println("Détails de la personne avec l'ID " + idToDisplay + ":");
@@ -134,13 +135,13 @@ public class App {
     private static void deletePersonById(PersonneDao personneDao, Scanner scanner, Connection connection) {
         System.out.println("Entrez l'ID de la personne que vous souhaitez supprimer : ");
         int idToDelete = scanner.nextInt();
-        personneDao.deleteById(idToDelete, connection);
+        personneDao.deletePersonneById(idToDelete, connection);
     }
 
     private static void updatePerson(PersonneDao personneDao, Scanner scanner, Connection connection) {
         System.out.println("Entrez l'ID de la personne que vous souhaitez mettre à jour : ");
         int idToUpdate = scanner.nextInt();
-        Personne personneToUpdate = personneDao.getById(idToUpdate, connection);
+        Personne personneToUpdate = personneDao.getPersonneById(idToUpdate, connection);
 
         if (personneToUpdate != null) {
             System.out.println("Entrez le nouveau nom : ");
@@ -157,4 +158,8 @@ public class App {
             System.out.println("Aucune personne trouvée avec l'ID " + idToUpdate);
         }
     }
+
+    //---------------------------------------------------------------------------------
+    
+    //Article SECTION
 }

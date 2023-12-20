@@ -1,12 +1,9 @@
 package demo;
 
-//Classe représentant une personne avec ses attributs (ID, nom, âge)
-public class Personne {
+public class Article {
     private int id;
     private String nom;
-    private int age;
-
-    // Méthodes getters et setters pour accéder et modifier les attributs
+    private int prix;
 
     public int getId() {
         return id;
@@ -24,12 +21,11 @@ public class Personne {
         this.nom = nom;
     }
 
-    public int getAge() {
-        return age;
+    public int getPrix() {
+        return prix;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPrix(int prix) {
+        this.prix = prix;
     }
-
 }
