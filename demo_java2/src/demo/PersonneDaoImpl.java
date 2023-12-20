@@ -6,18 +6,25 @@ import java.util.List;
 
 public class PersonneDaoImpl implements PersonneDao {
 
-    private static final String SELECT_ALL_QUERY = "SELECT * FROM PERSONNE";
-    private static final String SELECT_BY_ID_QUERY = "SELECT * FROM PERSONNE WHERE ID = ?";
-    private static final String INSERT_QUERY = "INSERT INTO PERSONNE (ID, NAME, AGE) VALUES (?, ?, ?)";
-    private static final String DELETE_BY_ID_QUERY = "DELETE FROM PERSONNE WHERE ID = ?";
-    private static final String UPDATE_QUERY = "UPDATE PERSONNE SET NAME = ?, AGE = ? WHERE ID = ?";
-
+    private static final String SELECT_ALL_QUERY_PERSONNE = "SELECT * FROM PERSONNE";
+    private static final String SELECT_BY_ID_QUERY_PERSONNE = "SELECT * FROM PERSONNE WHERE ID = ?";
+    private static final String INSERT_QUERY_PERSONNE = "INSERT INTO PERSONNE (ID, NAME, AGE) VALUES (?, ?, ?)";
+    private static final String DELETE_BY_ID_QUERY_PERSONNE = "DELETE FROM PERSONNE WHERE ID = ?";
+    private static final String UPDATE_QUERY_PERSONNE = "UPDATE PERSONNE SET NAME = ?, AGE = ? WHERE ID = ?";
+    //--------------------------------------------------------------------------------------
+    private static final String SELECT_ALL_QUERY_ARTICLE = "SELECT * FROM ARTICLE";
+    private static final String SELECT_BY_ID_QUERY_ARTICLE = "SELECT * FROM ARTICLE WHERE ID = ?";
+    private static final String INSERT_QUERY_ARTICLE = "INSERT INTO ARTICLE (ID, NAME, AGE) VALUES (?, ?, ?)";
+    private static final String DELETE_BY_ID_QUERY_ARTICLE = "DELETE FROM ARTICLE WHERE ID = ?";
+    private static final String UPDATE_QUERY_ARTICLE = "UPDATE ARTICLE SET NAME = ?, AGE = ? WHERE ID = ?";
+    
+    
     @Override
     public List<Personne> getAllPersons(Connection connection) {
         List<Personne> personnes = new ArrayList<>();
 
         try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SELECT_ALL_QUERY)) {
+             ResultSet resultSet = statement.executeQuery(SELECT_ALL_QUERY_PERSONNE)) {
 
             while (resultSet.next()) {
                 Personne personne = mapResultSetToPersonne(resultSet);
@@ -35,7 +42,7 @@ public class PersonneDaoImpl implements PersonneDao {
     public Personne getById(int id, Connection connection) {
         Personne personne = null;
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID_QUERY)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID_QUERY_PERSONNE)) {
             preparedStatement.setInt(1, id);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -53,7 +60,7 @@ public class PersonneDaoImpl implements PersonneDao {
 
     @Override
     public void createPersonne(Personne personne, Connection connection) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_PERSONNE)) {
             preparedStatement.setInt(1, personne.getId());
             preparedStatement.setString(2, personne.getNom());
             preparedStatement.setInt(3, personne.getAge());
@@ -68,7 +75,7 @@ public class PersonneDaoImpl implements PersonneDao {
 
     @Override
     public void deleteById(int id, Connection connection) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID_QUERY_PERSONNE)) {
             preparedStatement.setInt(1, id);
 
             int affectedRows = preparedStatement.executeUpdate();
@@ -81,7 +88,7 @@ public class PersonneDaoImpl implements PersonneDao {
 
     @Override
     public void updatePersonne(Personne personne, Connection connection) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY_PERSONNE)) {
             preparedStatement.setString(1, personne.getNom());
             preparedStatement.setInt(2, personne.getAge());
             preparedStatement.setInt(3, personne.getId());

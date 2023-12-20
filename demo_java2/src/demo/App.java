@@ -11,9 +11,9 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Lancement du script de connexion");
 
-        String jdbcurl = "url/using/h2/localhost";
-        String login = "your_log";
-        String mdp = "your_passwd";
+        String jdbcurl = "jdbc:h2:tcp://localhost/~/test";
+		String login = "root";
+		String mdp = "root";
 
         try (Connection connection = DriverManager.getConnection(jdbcurl, login, mdp)) {
             System.out.println("Connexion réussie");
@@ -72,7 +72,17 @@ public class App {
         System.out.println("3. Insérer une personne dans la bdd");
         System.out.println("4. Supprimer une personne de la bdd");
         System.out.println("5. Mettre à jour une personne");
-        System.out.println("6. Fin");
+        System.out.println("------------------------");
+        System.out.println("6. Chercher un article via son ID");
+        System.out.println("7. Insérer un article dans la bdd");
+        System.out.println("8. Supprimer un article de la bdd");
+        System.out.println("9. Mettre à jour un article");
+        System.out.println("------------------------");
+        System.out.println("10. Chercher une commande via son ID");
+        System.out.println("11. Insérer une commande dans la bdd");
+        System.out.println("12. Supprimer une une commande de la bdd");
+        System.out.println("13. Mettre à jour une une commande");
+        System.out.println("14. Fin");
     }
 
     private static void displayAllPersons(PersonneDao personneDao, Connection connection) {
