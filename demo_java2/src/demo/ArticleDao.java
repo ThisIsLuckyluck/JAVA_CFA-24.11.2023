@@ -10,7 +10,7 @@ public interface ArticleDao {
 
     void createArticle(Article article, Connection connection);
 
-    void deleteByIdArticle(int id, Connection connection);
+    void deleteArticleById(int id, Connection connection);
 
     void updateArticle(Article article, Connection connection);
 }

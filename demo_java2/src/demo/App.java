@@ -18,6 +18,8 @@ public class App {
         try (Connection connection = DriverManager.getConnection(jdbcurl, login, mdp)) {
             System.out.println("Connexion réussie");
 
+            CommandeDao commandeDao = new PersonneDaoImpl();
+            ArticleDao articleDao = new PersonneDaoImpl();
             PersonneDao personneDao = new PersonneDaoImpl();
             Scanner scanner = new Scanner(System.in);
 
@@ -51,7 +53,35 @@ public class App {
                         updatePerson(personneDao, scanner, connection);
                         break;
                     case 6:
-                        System.out.println("Fin du programme.");
+                        displayAllArticles(articleDao, connection);
+                        break;
+                    case 7:
+                        createNewArticle(articleDao, scanner, connection);
+                        break;
+                    case 8:
+                        deleteArticleById(articleDao, scanner, connection);
+                        break;
+                    case 9:
+                        updateArticle(articleDao, scanner, connection);
+                        break;
+                    case 10:
+                        displayAllCommandes(commandeDao, connection);
+                        break;
+                    case 11:
+                        createNewCommande(commandeDao, scanner, connection);
+                        break;
+                    case 12:
+                        deleteCommandeById(commandeDao, scanner, connection);
+                        break;
+                    case 13:
+                        updateCommande(commandeDao, scanner, connection);
+                        break;
+                    
+                    case 15:
+                        System.out.println("Fin du programme");
+                        break;
+                    case 14:
+                        System.out.println("Fin du programme");
                         break;
                     default:
                         System.out.println("Choix non valide. Veuillez réessayer.");
@@ -162,4 +192,137 @@ public class App {
     //---------------------------------------------------------------------------------
     
     //Article SECTION
+
+    public static void displayAllArticles(ArticleDao articleDao, Connection connection) {
+        List<Article> articles = articleDao.getAllArticles(connection);
+
+        if (!articles.isEmpty()) {
+            System.out.println("Liste de tous les articles :");
+            for (Article article : articles) {
+                System.out.println("ID: " + article.getId() + ", Nom: " + article.getNom() + ", Prix: " + article.getPrix());
+            }
+        } else {
+            System.out.println("Aucun article trouvé.");
+        }
+    }
+
+    public static void createNewArticle(ArticleDao articleDao, Scanner scanner, Connection connection) {
+        System.out.println("Entrez l'ID du nouvel article : ");
+        int id = scanner.nextInt();
+
+        scanner.nextLine();
+
+        System.out.println("Entrez le nom du nouvel article : ");
+        String nom = scanner.nextLine();
+
+        System.out.println("Entrez le prix du nouvel article : ");
+        int prix = scanner.nextInt();
+
+        Article nouvelArticle = new Article();
+        nouvelArticle.setId(id);
+        nouvelArticle.setNom(nom);
+        nouvelArticle.setPrix(prix);
+
+        articleDao.createArticle(nouvelArticle, connection);
+    }
+    public static void deleteArticleById(ArticleDao articleDao, Scanner scanner, Connection connection) {
+        System.out.println("Entrez l'ID de l'article que vous souhaitez supprimer : ");
+        int idToDelete = scanner.nextInt();
+        articleDao.deleteArticleById(idToDelete, connection);
+    }
+
+    public static void updateArticle(ArticleDao articleDao, Scanner scanner, Connection connection) {
+        System.out.println("Entrez l'ID de l'article que vous souhaitez mettre à jour : ");
+        int idToUpdate = scanner.nextInt();
+        Article articleToUpdate = articleDao.getArticleById(idToUpdate, connection);
+
+        if (articleToUpdate != null) {
+            System.out.println("Entrez le nouveau nom : ");
+            String newNom = scanner.next();
+
+            System.out.println("Entrez le nouveau prix : ");
+            int newPrix = scanner.nextInt();
+
+            articleToUpdate.setNom(newNom);
+            articleToUpdate.setPrix(newPrix);
+
+            articleDao.updateArticle(articleToUpdate, connection);
+        } else {
+            System.out.println("Aucun article trouvé avec l'ID " + idToUpdate);
+        }
+    }
+    //---------------------------------------------------------------------------------
+    //Commande SECTION
+    public static void displayAllCommandes(CommandeDao commandeDao, Connection connection) {
+        List<Commande> commandes = commandeDao.getAllCommandes(connection);
+
+        if (!commandes.isEmpty()) {
+            System.out.println("Liste de toutes les commandes :");
+            for (Commande commande : commandes) {
+                System.out.println("ID: " + commande.getId() + ", Nom: " + commande.getNom() + ", Prix: " + commande.getPrix());
+            }
+        } else {
+            System.out.println("Aucune commande trouvée.");
+        }
+    }
+
+    public static void createNewCommande(CommandeDao commandeDao, Scanner scanner, Connection connection) {
+        System.out.println("Entrez l'ID de la nouvelle commande : ");
+        int id = scanner.nextInt();
+
+        scanner.nextLine();
+
+        System.out.println("Entrez le nom de la nouvelle commande : ");
+        String nom = scanner.nextLine();
+
+        System.out.println("Entrez le prix de la nouvelle commande : ");
+        int prix = scanner.nextInt();
+
+        Commande nouvelleCommande = new Commande();
+        nouvelleCommande.setId(id);
+        nouvelleCommande.setNom(nom);
+        nouvelleCommande.setPrix(prix);
+
+        commandeDao.createCommande(nouvelleCommande, connection);
+    }
+
+    public static void deleteCommandeById(CommandeDao commandeDao, Scanner scanner, Connection connection) {
+        System.out.println("Entrez l'ID de la commande que vous souhaitez supprimer : ");
+        int idToDelete = scanner.nextInt();
+        commandeDao.deleteCommandeById(idToDelete, connection);
+    }
+
+    public static void updateCommande(CommandeDao commandeDao, Scanner scanner, Connection connection) {
+        System.out.println("Entrez l'ID de la commande que vous souhaitez mettre à jour : ");
+        int idToUpdate = scanner.nextInt();
+        Commande commandeToUpdate = commandeDao.getCommandeById(idToUpdate, connection);
+
+        if (commandeToUpdate != null) {
+            System.out.println("Entrez le nouveau nom : ");
+            String newNom = scanner.next();
+
+            System.out.println("Entrez le nouveau prix : ");
+            int newPrix = scanner.nextInt();
+
+            commandeToUpdate.setNom(newNom);
+            commandeToUpdate.setPrix(newPrix);
+
+            commandeDao.updateCommande(commandeToUpdate, connection);
+        } else {
+            System.out.println("Aucune commande trouvée avec l'ID " + idToUpdate);
+        }
+    }
+
+    public static void displayCommandeById(CommandeDao commandeDao, Scanner scanner, Connection connection) {
+        System.out.println("Entrez l'ID de la commande que vous souhaitez afficher : ");
+        int idToDisplay = scanner.nextInt();
+        Commande commande = commandeDao.getCommandeById(idToDisplay, connection);
+
+        if (commande != null) {
+            System.out.println("Détails de la commande avec l'ID " + idToDisplay + ":");
+            System.out.println("Nom: " + commande.getNom() + ", Prix: " + commande.getPrix());
+        } else {
+            System.out.println("Aucune commande trouvée avec l'ID " + idToDisplay);
+        }
+    }
 }
