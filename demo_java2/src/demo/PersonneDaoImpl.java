@@ -14,15 +14,15 @@ public class PersonneDaoImpl implements PersonneDao, ArticleDao, CommandeDao{
     //--------------------------------------------------------------------------------------
     private static final String SELECT_ALL_QUERY_ARTICLE = "SELECT * FROM ARTICLE";
     private static final String SELECT_BY_ID_QUERY_ARTICLE = "SELECT * FROM ARTICLE WHERE ID = ?";
-    private static final String INSERT_QUERY_ARTICLE = "INSERT INTO ARTICLE (ID, NAME, AGE) VALUES (?, ?, ?)";
+    private static final String INSERT_QUERY_ARTICLE = "INSERT INTO ARTICLE (ID, NAME, PRICE) VALUES (?, ?, ?)";
     private static final String DELETE_BY_ID_QUERY_ARTICLE = "DELETE FROM ARTICLE WHERE ID = ?";
-    private static final String UPDATE_QUERY_ARTICLE = "UPDATE ARTICLE SET NAME = ?, AGE = ? WHERE ID = ?";
+    private static final String UPDATE_QUERY_ARTICLE = "UPDATE ARTICLE SET NAME = ?, PRICE = ? WHERE ID = ?";
     //--------------------------------------------------------------------------------------
     private static final String SELECT_ALL_QUERY_COMMANDE = "SELECT * FROM COMMANDE";
     private static final String SELECT_BY_ID_QUERY_COMMANDE = "SELECT * FROM COMMANDE WHERE ID = ?";
-    private static final String INSERT_QUERY_COMMANDE = "INSERT INTO COMMANDE (ID, NAME, AGE) VALUES (?, ?, ?)";
+    private static final String INSERT_QUERY_COMMANDE = "INSERT INTO COMMANDE (ID, NAME, PRICE) VALUES (?, ?, ?)";
     private static final String DELETE_BY_ID_QUERY_COMMANDE = "DELETE FROM COMMANDE WHERE ID = ?";
-    private static final String UPDATE_QUERY_COMMANDE = "UPDATE COMMANDE SET NAME = ?, AGE = ? WHERE ID = ?";
+    private static final String UPDATE_QUERY_COMMANDE = "UPDATE COMMANDE SET NAME = ?, PRICE = ? WHERE ID = ?";
     
 
     //Partie Personne
