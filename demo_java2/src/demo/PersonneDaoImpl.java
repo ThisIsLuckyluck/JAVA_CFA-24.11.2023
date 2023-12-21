@@ -23,7 +23,7 @@ public class PersonneDaoImpl implements PersonneDao, ArticleDao, CommandeDao{
     private static final String INSERT_QUERY_COMMANDE = "INSERT INTO COMMANDE (ID, NAME, PRICE) VALUES (?, ?, ?)";
     private static final String DELETE_BY_ID_QUERY_COMMANDE = "DELETE FROM COMMANDE WHERE ID = ?";
     private static final String UPDATE_QUERY_COMMANDE = "UPDATE COMMANDE SET NAME = ?, PRICE = ? WHERE ID = ?";
-    
+    //--------------------------------------------------------------------------------------
 
     //Partie Personne
 

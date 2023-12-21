@@ -76,10 +76,6 @@ public class App {
                     case 13:
                         updateCommande(commandeDao, scanner, connection);
                         break;
-                    
-                    case 15:
-                        System.out.println("Fin du programme");
-                        break;
                     case 14:
                         System.out.println("Fin du programme");
                         break;
