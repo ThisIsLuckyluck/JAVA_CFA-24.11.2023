@@ -7,7 +7,7 @@ public class App_Search {
 		
 		System.out.println("Lancement du script de connection");
 		
-		String jdbcurl = "jdbc:h2:tcp://localhost/~/test";
+		String jdbcurl = "jdbc:h2:tcp://localhost/db_name";
 		String login = "root";
 		String mdp = "root";
 		
