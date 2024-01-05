@@ -9,7 +9,7 @@ public class App_Byid {
 		
         System.out.println("Lancement du script de connexion");
 		
-        String jdbcurl = "jdbc:h2:tcp://localhost/db_name";
+        String jdbcurl = "jdbc:h2:tcp://localhost/~/test";
         String login = "root";
         String mdp = "root";
 		
